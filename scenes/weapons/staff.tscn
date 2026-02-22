@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://bv23mpjuhhsh0"]
+
+[ext_resource type="Script" uid="uid://cx4axm1cwk2o" path="res://scenes/weapons/staff.gd" id="1_pn6r1"]
+[ext_resource type="AudioStream" uid="uid://ci06j4d4gwolv" path="res://sounds/staff_shoot.wav" id="2_h6rb7"]
+
+[node name="Staff" type="Node2D"]
+scale = Vector2(1.2, 1.2)
+script = ExtResource("1_pn6r1")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.15
+one_shot = true
+
+[node name="StaffShootSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_h6rb7")
+bus = &"Sounds"

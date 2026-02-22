@@ -1,0 +1,16 @@
+if {felix_loop} == false:
+	Hello traveller! I'm Felix, it's pleasure to meet you.
+	if {health} == 5:
+		Ah, I see that you're not wounded, that's great! You must have some impressive dodging skills!
+	elif {health} < 5.0:
+		I see that you're wounded, can I take a look?
+		- Yes
+			[signal arg="heal"]
+			There, You should be good as new.
+		- No
+			Sorry, I didn't mean to intrude.
+	If you plan on going deeper, I would be careful beacause up next is the guardian's room.
+	If you want you can rest here a bit, it's always nice to have some company.
+	set {felix_loop} = true
+else:
+	...

@@ -1,0 +1,75 @@
+[gd_scene load_steps=9 format=3 uid="uid://hdyca2lpkulj"]
+
+[ext_resource type="Script" uid="uid://cc3pbtq2d4ipv" path="res://scenes/game/boss_trapdoor.gd" id="1_adkc7"]
+[ext_resource type="Texture2D" uid="uid://bhq3jnc3ds4ni" path="res://sprites/boss_closed_trapdoor.png" id="1_wm725"]
+[ext_resource type="Texture2D" uid="uid://bvbexym3sm84l" path="res://sprites/boss_half_open_trapdoor.png" id="2_etn1e"]
+[ext_resource type="Texture2D" uid="uid://btx1bppvxnqe7" path="res://sprites/boss_open_trapdoor.png" id="3_ij2pu"]
+[ext_resource type="AudioStream" uid="uid://oq6xoxxvovf1" path="res://sounds/boss_trapdoor_open.wav" id="5_rbext"]
+[ext_resource type="AudioStream" uid="uid://cpxds8qgjwxy8" path="res://sounds/boss_trapdoor_opening.wav" id="5_rivbo"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ectj7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_wm725")
+}],
+"loop": true,
+"name": &"closed",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_etn1e")
+}],
+"loop": true,
+"name": &"half_open",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_ij2pu")
+}],
+"loop": true,
+"name": &"open",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_28m6j"]
+size = Vector2(128, 128)
+
+[node name="BossTrapdoor" type="Node2D"]
+z_index = -5
+script = ExtResource("1_adkc7")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_ectj7")
+animation = &"closed"
+autoplay = "closed"
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, 64)
+shape = SubResource("RectangleShape2D_28m6j")
+disabled = true
+
+[node name="OpeningTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+autostart = true
+
+[node name="OpenTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[node name="OpeningSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_rivbo")
+volume_db = 15.0
+
+[node name="OpenSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_rbext")
+volume_db = 10.0
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="timeout" from="OpenTimer" to="." method="_on_open_timer_timeout"]

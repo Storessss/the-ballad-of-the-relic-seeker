@@ -1,0 +1,62 @@
+[gd_scene load_steps=7 format=3 uid="uid://cbfjjrqf8f4rq"]
+
+[ext_resource type="Script" uid="uid://drhgfx45c4nmm" path="res://scenes/enemies/crusher.gd" id="1_wvg26"]
+[ext_resource type="Texture2D" uid="uid://ccnqt06k883uu" path="res://sprites/crusher_attack.png" id="2_rbte7"]
+[ext_resource type="Texture2D" uid="uid://byoiknkpry05g" path="res://sprites/crusher_attack2.png" id="3_ct638"]
+[ext_resource type="AudioStream" uid="uid://caoj7e6xvlbdp" path="res://sounds/crusher_crush.wav" id="4_jynef"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_fw01a"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_ct638")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_ct638")
+}],
+"loop": true,
+"name": &"attack",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_rbte7")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_kwgq7"]
+radius = 41.5761
+
+[node name="Crusher" type="CharacterBody2D"]
+scale = Vector2(1.3, 1.3)
+collision_layer = 4
+script = ExtResource("1_wvg26")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -13)
+sprite_frames = SubResource("SpriteFrames_fw01a")
+animation = &"idle"
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, 1)
+shape = SubResource("CircleShape2D_kwgq7")
+
+[node name="DeModulate" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+
+[node name="AttackTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="CrushSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_jynef")
+bus = &"Sounds"
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="timeout" from="DeModulate" to="." method="_on_de_modulate_timeout"]

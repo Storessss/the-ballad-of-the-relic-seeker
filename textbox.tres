@@ -1,0 +1,5 @@
+[gd_resource type="Theme" format=3 uid="uid://cwvrvv6p3s6mq"]
+
+[resource]
+TextEdit/colors/background_color = Color(0.667819, 0.539853, 0.990731, 1)
+TextEdit/colors/font_readonly_color = Color(0, 0, 0, 1)

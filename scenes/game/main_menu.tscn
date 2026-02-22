@@ -1,0 +1,127 @@
+[gd_scene format=3 uid="uid://dnw4mrorpwsqn"]
+
+[ext_resource type="Script" uid="uid://du6uc2flhwwrh" path="res://scenes/game/main_menu.gd" id="1_guq8o"]
+[ext_resource type="FontFile" uid="uid://cydq6qjgc5bb5" path="res://fonts/withered.ttf" id="1_qpsj1"]
+[ext_resource type="Theme" uid="uid://bjmydijqcfwqy" path="res://scenes/game/button.tres" id="3_bmnrq"]
+[ext_resource type="PackedScene" uid="uid://be10l6jhhjq4r" path="res://scenes/game/controls.tscn" id="4_3vhat"]
+[ext_resource type="Theme" uid="uid://cwvrvv6p3s6mq" path="res://textbox.tres" id="4_gknc0"]
+[ext_resource type="FontFile" uid="uid://c4puq4ly4red" path="res://fonts/yoster.ttf" id="4_ir5kv"]
+
+[node name="MainMenu" type="Control" unique_id=581748732]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_guq8o")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1557224087]
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+color = Color(0.219608, 0.0392157, 0.443137, 1)
+
+[node name="Label" type="Label" parent="." unique_id=121053218]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 86.0
+offset_right = 1896.0
+offset_bottom = 398.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_qpsj1")
+theme_override_font_sizes/font_size = 150
+text = "THE BALLAD OF THE RELIC SEEKER"
+
+[node name="Start" type="Button" parent="." unique_id=2109304421]
+custom_minimum_size = Vector2(250, 70)
+layout_mode = 0
+offset_top = 398.0
+offset_right = 1920.0
+offset_bottom = 516.0
+theme = ExtResource("3_bmnrq")
+theme_override_fonts/font = ExtResource("1_qpsj1")
+theme_override_font_sizes/font_size = 75
+text = "START"
+
+[node name="Settings" type="Button" parent="." unique_id=1399014940]
+custom_minimum_size = Vector2(250, 70)
+layout_mode = 0
+offset_top = 516.0
+offset_right = 1920.0
+offset_bottom = 634.0
+theme = ExtResource("3_bmnrq")
+theme_override_fonts/font = ExtResource("1_qpsj1")
+theme_override_font_sizes/font_size = 75
+text = "SETTINGS"
+
+[node name="Controls" type="Button" parent="." unique_id=193281973]
+custom_minimum_size = Vector2(250, 70)
+layout_mode = 0
+offset_top = 634.0
+offset_right = 1920.0
+offset_bottom = 752.0
+theme = ExtResource("3_bmnrq")
+theme_override_fonts/font = ExtResource("1_qpsj1")
+theme_override_font_sizes/font_size = 75
+text = "CONTROLS"
+
+[node name="Credits" type="Button" parent="." unique_id=1687246978]
+custom_minimum_size = Vector2(250, 70)
+layout_mode = 0
+offset_left = 1.0
+offset_top = 752.0
+offset_right = 1921.0
+offset_bottom = 870.0
+theme = ExtResource("3_bmnrq")
+theme_override_fonts/font = ExtResource("1_qpsj1")
+theme_override_font_sizes/font_size = 75
+text = "CREDITS"
+
+[node name="Quit" type="Button" parent="." unique_id=703769280]
+visible = false
+custom_minimum_size = Vector2(250, 70)
+layout_mode = 0
+offset_top = 870.0
+offset_right = 1920.0
+offset_bottom = 988.0
+theme = ExtResource("3_bmnrq")
+theme_override_fonts/font = ExtResource("1_qpsj1")
+theme_override_font_sizes/font_size = 75
+text = "QUIT"
+
+[node name="ControlsInfo" parent="." unique_id=1591040244 instance=ExtResource("4_3vhat")]
+layout_mode = 0
+
+[node name="CreditsTextBox" type="TextEdit" parent="." unique_id=671728142]
+visible = false
+layout_mode = 0
+offset_left = 1019.0
+offset_top = 313.0
+offset_right = 4019.0
+offset_bottom = 1581.0
+scale = Vector2(0.3, 0.3)
+theme = ExtResource("4_gknc0")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_constants/line_spacing = 10
+theme_override_fonts/font = ExtResource("4_ir5kv")
+theme_override_font_sizes/font_size = 90
+text = "
+Game by Store
+
+Music by Malachy Clarke and jcsoundtracks
+
+Sound effects made using Bfxr or taken from Pixabay
+
+Made in the amaizing Godot 4
+
+Dialogic addon made by Jowan-Spooner and Emilio Coppola
+
+Yoster Island font by codeman38
+
+Withered font by Bingula Designs"
+editable = false
+wrap_mode = 1
+scroll_fit_content_height = true
+
+[connection signal="pressed" from="Start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="Settings" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="Controls" to="." method="_on_controls_pressed"]
+[connection signal="pressed" from="Credits" to="." method="_on_credits_pressed"]
+[connection signal="pressed" from="Quit" to="." method="_on_quit_pressed"]

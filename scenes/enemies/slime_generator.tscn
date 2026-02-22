@@ -1,0 +1,28 @@
+[gd_scene load_steps=3 format=3 uid="uid://ge42eqaiin74"]
+
+[ext_resource type="Script" path="res://scenes/enemies/slime_generator.gd" id="1_7kewg"]
+
+[sub_resource type="Gradient" id="Gradient_5cs0c"]
+colors = PackedColorArray(0.999838, 0.962888, 0.926007, 1, 0.88, 0.279547, 0.0968, 1)
+
+[node name="SlimeGenerator" type="Node2D"]
+script = ExtResource("1_7kewg")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+amount = 50
+lifetime = 0.6
+explosiveness = 0.5
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 100.0
+initial_velocity_max = 200.0
+scale_amount_min = 5.0
+scale_amount_max = 10.0
+color = Color(0.94, 0.44462, 0.0658, 1)
+color_ramp = SubResource("Gradient_5cs0c")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

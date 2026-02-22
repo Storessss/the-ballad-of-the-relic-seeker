@@ -1,0 +1,179 @@
+[gd_scene load_steps=6 format=3 uid="uid://bxqlo567ytigx"]
+
+[ext_resource type="Script" uid="uid://dlaxdawh224wf" path="res://scenes/game/settings.gd" id="1_74fi8"]
+[ext_resource type="FontFile" uid="uid://c4puq4ly4red" path="res://fonts/yoster.ttf" id="1_ce7df"]
+[ext_resource type="Theme" uid="uid://bjmydijqcfwqy" path="res://scenes/game/button.tres" id="3_byufx"]
+[ext_resource type="AudioStream" uid="uid://b6jrxvlfsvbli" path="res://sounds/melee_deflect.wav" id="4_kase6"]
+[ext_resource type="PackedScene" uid="uid://be10l6jhhjq4r" path="res://scenes/game/controls.tscn" id="4_rnygm"]
+
+[node name="Settings" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_74fi8")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+color = Color(0.219608, 0.0392157, 0.443137, 1)
+
+[node name="Settings" type="Label" parent="."]
+layout_mode = 0
+offset_right = 758.0
+offset_bottom = 101.0
+scale = Vector2(0.8, 0.8)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("1_ce7df")
+theme_override_font_sizes/font_size = 100
+text = "Settings"
+
+[node name="MasterLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 710.0
+offset_top = 290.0
+offset_right = 1468.0
+offset_bottom = 391.0
+scale = Vector2(0.4, 0.4)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("1_ce7df")
+theme_override_font_sizes/font_size = 100
+text = "Master Volume"
+
+[node name="Master" type="HSlider" parent="."]
+process_mode = 3
+layout_mode = 0
+offset_left = 710.0
+offset_top = 350.0
+offset_right = 1210.0
+offset_bottom = 382.0
+min_value = -50.0
+max_value = 15.0
+
+[node name="MusicLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 710.0
+offset_top = 440.0
+offset_right = 1468.0
+offset_bottom = 541.0
+scale = Vector2(0.4, 0.4)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("1_ce7df")
+theme_override_font_sizes/font_size = 100
+text = "Music Volume"
+
+[node name="Music" type="HSlider" parent="."]
+process_mode = 3
+layout_mode = 0
+offset_left = 710.0
+offset_top = 500.0
+offset_right = 1210.0
+offset_bottom = 532.0
+min_value = -50.0
+max_value = 15.0
+
+[node name="SoundLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 710.0
+offset_top = 590.0
+offset_right = 1468.0
+offset_bottom = 691.0
+scale = Vector2(0.4, 0.4)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("1_ce7df")
+theme_override_font_sizes/font_size = 100
+text = "Sound Volume"
+
+[node name="Sounds" type="HSlider" parent="."]
+process_mode = 3
+layout_mode = 0
+offset_left = 710.0
+offset_top = 650.0
+offset_right = 1210.0
+offset_bottom = 682.0
+min_value = -50.0
+max_value = 15.0
+
+[node name="ScreenShakeLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 710.0
+offset_top = 740.0
+offset_right = 1468.0
+offset_bottom = 841.0
+scale = Vector2(0.4, 0.4)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("1_ce7df")
+theme_override_font_sizes/font_size = 100
+text = "Screen Shake"
+
+[node name="ScreenShake" type="CheckBox" parent="."]
+process_mode = 3
+layout_mode = 0
+offset_left = 1020.0
+offset_top = 740.0
+offset_right = 1044.0
+offset_bottom = 764.0
+scale = Vector2(2, 2)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+button_pressed = true
+
+[node name="Back" type="Button" parent="."]
+process_mode = 3
+layout_mode = 0
+offset_top = 1009.0
+offset_right = 268.0
+offset_bottom = 1110.0
+scale = Vector2(0.7, 0.7)
+theme = ExtResource("3_byufx")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("1_ce7df")
+theme_override_font_sizes/font_size = 75
+text = "Back"
+
+[node name="Quit" type="Button" parent="."]
+process_mode = 3
+visible = false
+layout_mode = 0
+offset_left = 1413.0
+offset_top = 1009.0
+offset_right = 2142.0
+offset_bottom = 1110.0
+scale = Vector2(0.7, 0.7)
+theme = ExtResource("3_byufx")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("1_ce7df")
+theme_override_font_sizes/font_size = 75
+disabled = true
+text = "Quit To Main Menu"
+
+[node name="Controls" type="Button" parent="."]
+process_mode = 3
+visible = false
+layout_mode = 0
+offset_left = 1628.0
+offset_right = 2044.0
+offset_bottom = 101.0
+scale = Vector2(0.7, 0.7)
+theme = ExtResource("3_byufx")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("1_ce7df")
+theme_override_font_sizes/font_size = 75
+text = "Controls"
+
+[node name="ControlsInfo" parent="." instance=ExtResource("4_rnygm")]
+
+[node name="TestSound" type="AudioStreamPlayer2D" parent="."]
+process_mode = 3
+stream = ExtResource("4_kase6")
+bus = &"Sounds"
+
+[connection signal="value_changed" from="Master" to="." method="_on_master_value_changed"]
+[connection signal="value_changed" from="Music" to="." method="_on_music_value_changed"]
+[connection signal="value_changed" from="Sounds" to="." method="_on_sounds_value_changed"]
+[connection signal="toggled" from="ScreenShake" to="." method="_on_screen_shake_toggled"]
+[connection signal="pressed" from="Back" to="." method="_on_back_pressed"]
+[connection signal="pressed" from="Quit" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="Controls" to="." method="_on_controls_pressed"]

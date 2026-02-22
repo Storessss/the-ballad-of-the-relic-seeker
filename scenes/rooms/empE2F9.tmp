@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://dej31nj7u761f"]
+
+[ext_resource type="PackedScene" uid="uid://bcdehli04jgl" path="res://scenes/game/player.tscn" id="1_rivhs"]
+[ext_resource type="Script" path="res://scenes/rooms/empty_room.gd" id="1_u7yd8"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_qkfhm"]
+vertices = PackedVector2Array(1906, 9, 1907, 1067, 10, 1068, 11, 4)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(2, -6, 1916, 0, 1918, 1077, 0, 1079)])
+source_geometry_group_name = &"navigation_polygon_source_group"
+
+[node name="EmptyRoom" type="Node2D"]
+script = ExtResource("1_u7yd8")
+
+[node name="Player" parent="." instance=ExtResource("1_rivhs")]
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+navigation_polygon = SubResource("NavigationPolygon_qkfhm")
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

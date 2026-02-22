@@ -1,0 +1,96 @@
+[gd_scene load_steps=9 format=3 uid="uid://d2pomlycw8jmy"]
+
+[ext_resource type="Texture2D" uid="uid://br58hxyv55cc5" path="res://sprites/little_devil.png" id="1_fbp7f"]
+[ext_resource type="Script" uid="uid://bcl6ju6f0l4ta" path="res://scenes/enemies/bosses/little_devil.gd" id="1_spefd"]
+[ext_resource type="Texture2D" uid="uid://dendw4y873wef" path="res://sprites/little_devil_stagger.png" id="3_j75d2"]
+[ext_resource type="Texture2D" uid="uid://noum6og1i2a3" path="res://sprites/little_devil_walk1.png" id="4_3fwle"]
+[ext_resource type="Texture2D" uid="uid://br2cdmmr5v3kd" path="res://sprites/little_devil_walk2.png" id="5_2d58p"]
+[ext_resource type="AudioStream" uid="uid://bjpklh7gkpja8" path="res://sounds/boss_stagger.mp3" id="6_tjiwe"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_nv30v"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_fbp7f")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_j75d2")
+}],
+"loop": true,
+"name": &"stagger",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_3fwle")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_2d58p")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7256b"]
+radius = 19.105
+
+[node name="LittleDevil" type="CharacterBody2D"]
+scale = Vector2(1.45, 1.45)
+script = ExtResource("1_spefd")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(8, -9)
+sprite_frames = SubResource("SpriteFrames_nv30v")
+animation = &"stagger"
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_7256b")
+
+[node name="MovementTimer" type="Timer" parent="."]
+wait_time = 0.8
+one_shot = true
+autostart = true
+
+[node name="AttackTimer" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+
+[node name="DeModulate" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+
+[node name="DamagePhase" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
+autostart = true
+
+[node name="DamagePhaseStop" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
+
+[node name="BulletShockwave" type="Timer" parent="."]
+wait_time = 3.5
+one_shot = true
+autostart = true
+
+[node name="StaggerTimer" type="Timer" parent="."]
+wait_time = 4.0
+one_shot = true
+
+[node name="StaggerSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_tjiwe")
+volume_db = 7.0
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="timeout" from="DeModulate" to="." method="_on_de_modulate_timeout"]

@@ -1,0 +1,80 @@
+[gd_scene load_steps=9 format=3 uid="uid://bwr8x1634p67k"]
+
+[ext_resource type="Script" uid="uid://ety1c5vsuquc" path="res://scenes/enemies/triple_shooter.gd" id="1_2s74t"]
+[ext_resource type="Texture2D" uid="uid://p4hnxr5ewgy" path="res://sprites/triple_shooter_shoot1.png" id="2_5to40"]
+[ext_resource type="Texture2D" uid="uid://cxd35lo3bi5it" path="res://sprites/triple_shooter_shoot2.png" id="3_sj5kb"]
+[ext_resource type="Texture2D" uid="uid://cwxalud71mem5" path="res://sprites/triple_shooter_walk1.png" id="5_avucx"]
+[ext_resource type="Texture2D" uid="uid://b02j8gar3tp4s" path="res://sprites/triple_shooter_walk2.png" id="6_4rrp4"]
+[ext_resource type="SpriteFrames" uid="uid://c6hnb7kyiih2o" path="res://scenes/enemies/emotion.tres" id="7_3ddmt"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_fw01a"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_5to40")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_sj5kb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_sj5kb")
+}],
+"loop": true,
+"name": &"attack",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_avucx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_4rrp4")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 3.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0uqsn"]
+radius = 25.0799
+
+[node name="TripleShooter" type="CharacterBody2D"]
+collision_layer = 4
+motion_mode = 1
+wall_min_slide_angle = 0.0
+script = ExtResource("1_2s74t")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -13)
+sprite_frames = SubResource("SpriteFrames_fw01a")
+animation = &"walk"
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, -11)
+shape = SubResource("CircleShape2D_0uqsn")
+
+[node name="DeModulate" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+
+[node name="AttackTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="MovementTimer" type="Timer" parent="."]
+wait_time = 0.6
+one_shot = true
+autostart = true
+
+[node name="Emotion" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -75)
+sprite_frames = ExtResource("7_3ddmt")
+animation = &"normal"
+autoplay = "normal"
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="timeout" from="DeModulate" to="." method="_on_de_modulate_timeout"]

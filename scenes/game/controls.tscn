@@ -1,0 +1,61 @@
+[gd_scene format=3 uid="uid://be10l6jhhjq4r"]
+
+[ext_resource type="Theme" uid="uid://cwvrvv6p3s6mq" path="res://textbox.tres" id="1_waab8"]
+[ext_resource type="FontFile" uid="uid://c4puq4ly4red" path="res://fonts/yoster.ttf" id="2_muamb"]
+
+[node name="ControlsInfo" type="Control" unique_id=674949]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+
+[node name="KeyboardControls" type="TextEdit" parent="." unique_id=1139511758]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 93.0
+offset_right = 2651.0
+offset_bottom = 1601.0
+scale = Vector2(0.3, 0.3)
+theme = ExtResource("1_waab8")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("2_muamb")
+theme_override_font_sizes/font_size = 90
+text = "KEYBOARD
+
+WASD to move
+MOUSE to aim
+LEFT CLICK to attack
+RIGHT CLICK to dash
+MOUSE WHEEL UP for next weapon
+MOUSE WHEEL DOWN for previous weapon
+E to talk/interact
+F (hold) to use potion
+ESC to pause
+C to switch between mouse and controller aim"
+editable = false
+scroll_fit_content_height = true
+
+[node name="ControllerControls" type="TextEdit" parent="." unique_id=405755853]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 546.0
+offset_right = 2651.0
+offset_bottom = 2046.0
+scale = Vector2(0.3, 0.3)
+theme = ExtResource("1_waab8")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("2_muamb")
+theme_override_font_sizes/font_size = 90
+text = "CONTROLLER
+
+LEFT STICK to move
+RIGHT STICK to aim
+RT to attack
+LT to dash
+RB for next weapon
+LB for previous weapon
+X to talk/interact
+D-PAD DOWN (hold) to use potion
+MENU to pause
+VIEW to switch between mouse and controller aim"
+editable = false
+scroll_fit_content_height = true

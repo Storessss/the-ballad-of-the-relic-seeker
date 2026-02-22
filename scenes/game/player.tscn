@@ -1,0 +1,166 @@
+[gd_scene load_steps=20 format=3 uid="uid://bcdehli04jgl"]
+
+[ext_resource type="Texture2D" uid="uid://cmc7nxth3eh2c" path="res://sprites/zaine_idle1.png" id="1_nmj6o"]
+[ext_resource type="Script" uid="uid://bul74wgkqumrf" path="res://scenes/game/player.gd" id="1_nsxcj"]
+[ext_resource type="Texture2D" uid="uid://dcddgie8brlsp" path="res://sprites/zaine_idle2.png" id="2_vfbps"]
+[ext_resource type="Texture2D" uid="uid://c01rb63ucwfi1" path="res://sprites/zaine_walk1.png" id="3_igf7m"]
+[ext_resource type="Texture2D" uid="uid://cetgn70kpb3l0" path="res://sprites/blank.png" id="3_tari8"]
+[ext_resource type="Texture2D" uid="uid://bi7gy3857ixyj" path="res://sprites/zaine_walk2.png" id="4_fob6t"]
+[ext_resource type="Texture2D" uid="uid://bbl3ry2qgrvj4" path="res://sprites/zaine_paranoid1.png" id="5_x74ow"]
+[ext_resource type="Texture2D" uid="uid://ing16lbt1orw" path="res://sprites/zaine_paranoid2.png" id="6_3wvpb"]
+[ext_resource type="Texture2D" uid="uid://bn1pcar6nfog5" path="res://sprites/crosshair.png" id="6_mrg4y"]
+[ext_resource type="Texture2D" uid="uid://cp8h06n8256v" path="res://sprites/zaine_paranoid3.png" id="7_ead2a"]
+[ext_resource type="AudioStream" uid="uid://bufxlvyk7a8op" path="res://sounds/dash_sound.wav" id="8_4vi75"]
+[ext_resource type="Texture2D" uid="uid://dp1rukelysp0c" path="res://sprites/zaine_paranoid4.png" id="8_xvu1u"]
+[ext_resource type="Texture2D" uid="uid://bmclw5gxercgn" path="res://sprites/zaine_paranoid5.png" id="9_pskjy"]
+[ext_resource type="Texture2D" uid="uid://8al2vb4ddp6l" path="res://sprites/zaine_paranoid6.png" id="10_ykh0n"]
+[ext_resource type="Texture2D" uid="uid://bmu47yclt526e" path="res://sprites/zaine_paranoid7.png" id="11_k7i1v"]
+[ext_resource type="Texture2D" uid="uid://drocmviq3mvgs" path="res://sprites/zaine_paranoid9.png" id="12_qfve6"]
+[ext_resource type="Texture2D" uid="uid://d4as1wkxi7i6" path="res://sprites/zaine_paranoid10.png" id="13_u5xwx"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_j8km1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_nmj6o")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_tari8")
+}],
+"loop": true,
+"name": &"blink",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_nmj6o")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_vfbps")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_x74ow")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_3wvpb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_ead2a")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_x74ow")
+}, {
+"duration": 0.5,
+"texture": ExtResource("6_3wvpb")
+}, {
+"duration": 2.0,
+"texture": ExtResource("5_x74ow")
+}, {
+"duration": 3.0,
+"texture": ExtResource("8_xvu1u")
+}, {
+"duration": 3.0,
+"texture": ExtResource("9_pskjy")
+}, {
+"duration": 0.3,
+"texture": ExtResource("10_ykh0n")
+}, {
+"duration": 0.8,
+"texture": ExtResource("11_k7i1v")
+}, {
+"duration": 3.0,
+"texture": ExtResource("6_3wvpb")
+}, {
+"duration": 4.0,
+"texture": ExtResource("7_ead2a")
+}, {
+"duration": 2.0,
+"texture": ExtResource("12_qfve6")
+}, {
+"duration": 4.0,
+"texture": ExtResource("13_u5xwx")
+}, {
+"duration": 2.0,
+"texture": ExtResource("12_qfve6")
+}, {
+"duration": 2.0,
+"texture": ExtResource("6_3wvpb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_3wvpb")
+}],
+"loop": true,
+"name": &"shifting_eyes",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_igf7m")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_fob6t")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 3.5
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_avoo4"]
+size = Vector2(33, 36)
+
+[node name="Player" type="CharacterBody2D"]
+collision_layer = 2
+script = ExtResource("1_nsxcj")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_j8km1")
+animation = &"shifting_eyes"
+autoplay = "idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-3.5, 18)
+shape = SubResource("RectangleShape2D_avoo4")
+
+[node name="Forward" type="Node2D" parent="."]
+
+[node name="Weapon" type="Sprite2D" parent="Forward"]
+position = Vector2(0, -70)
+
+[node name="Back" type="Node2D" parent="."]
+rotation = 3.14159
+
+[node name="Weapon" type="Sprite2D" parent="Back"]
+position = Vector2(0, -70)
+
+[node name="DashTimer" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+
+[node name="SwitchWeapon" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+autostart = true
+
+[node name="Reticle" type="Sprite2D" parent="."]
+texture = ExtResource("6_mrg4y")
+
+[node name="IFrames" type="Timer" parent="."]
+wait_time = 1.5
+one_shot = true
+
+[node name="DashCooldown" type="Timer" parent="."]
+one_shot = true
+
+[node name="DashSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_4vi75")
+volume_db = -5.0
+bus = &"Sounds"
+
+[node name="AnimationTimer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true

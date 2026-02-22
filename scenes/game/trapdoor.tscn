@@ -1,0 +1,66 @@
+[gd_scene load_steps=8 format=3 uid="uid://drdk4krfpyck7"]
+
+[ext_resource type="Texture2D" uid="uid://cy5eqhpp3cbvq" path="res://sprites/closed_trapdoor.png" id="1_1jdf3"]
+[ext_resource type="Script" uid="uid://f1im5k47ny6n" path="res://scenes/game/trapdoor.gd" id="1_616kh"]
+[ext_resource type="Texture2D" uid="uid://4kohwln2gyy4" path="res://sprites/open_trapdoor.png" id="2_17wy6"]
+[ext_resource type="Texture2D" uid="uid://dyi6vk5i48iu0" path="res://sprites/half_open_trapdoor.png" id="3_a2tqy"]
+[ext_resource type="AudioStream" uid="uid://dh7ep6nrv6vaj" path="res://sounds/trapdoor_sound.wav" id="5_fi106"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_kk2a6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_1jdf3")
+}],
+"loop": true,
+"name": &"closed",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_a2tqy")
+}],
+"loop": true,
+"name": &"half_open",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_17wy6")
+}],
+"loop": true,
+"name": &"open",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uhvkr"]
+size = Vector2(120, 120)
+
+[node name="Trapdoor" type="Node2D"]
+z_index = -5
+script = ExtResource("1_616kh")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_kk2a6")
+animation = &"half_open"
+autoplay = "closed"
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, 64)
+shape = SubResource("RectangleShape2D_uhvkr")
+disabled = true
+
+[node name="OpeningTimer" type="Timer" parent="."]
+wait_time = 0.7
+one_shot = true
+
+[node name="OpeningSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_fi106")
+volume_db = 2.0
+bus = &"Sounds"
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="timeout" from="OpeningTimer" to="." method="_on_opening_timer_timeout"]

@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=3 uid="uid://5wry5d4n4c8h"]
+
+[ext_resource type="Texture2D" uid="uid://bbniecw5007bn" path="res://sprites/melee_swing.png" id="1_5ld7u"]
+[ext_resource type="Script" uid="uid://cwsfmadg0kqva" path="res://scenes/weapons/melee_swing.gd" id="1_m3u6y"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ocer4"]
+radius = 24.8909
+
+[node name="MeleeSwing" type="Node2D"]
+scale = Vector2(1.5, 1.5)
+script = ExtResource("1_m3u6y")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_5ld7u")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_mask = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(9.53674e-07, -2)
+shape = SubResource("CircleShape2D_ocer4")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.25
+one_shot = true
+autostart = true
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
